@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "487147307718",
+    "project_id": "chatpro-47c5c",
+    "storage_bucket": "chatpro-47c5c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487147307718:android:7efc491fee88c79f24cdc7",
+        "android_client_info": {
+          "package_name": "com.dev.chat_message"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7AyKNLgr-L51wCLYTCRLgx4cT6LxWDzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
