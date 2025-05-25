@@ -134,3 +134,8 @@ Widget messageToShow({
       );
   }
 }
+
+// like love haha sad wow angry plus sign
+List<String> reactions = ['👍', '❤', '😂', '😒', '🤬', '+'];
+
+List<String> contextMenu = ['Reply', 'Delete', 'Copy'];

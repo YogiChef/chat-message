@@ -21,24 +21,13 @@ class _VideoPlyServiceState extends State<VideoPlyService> {
 
   @override
   void initState() {
-    videoController = VideoPlayerController.networkUrl(
-      Uri.parse(widget.videoUrl),
-    );
-    initVideo();
+    videoController =
+        VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
+          ..addListener(() {})
+          ..initialize().then((_) {
+            videoController.setVolume(1);
+          });
     super.initState();
-  }
-
-  Future<void> initVideo() async {
-    try {
-      await videoController.initialize().timeout(Duration(seconds: 10));
-      setState(() {});
-      videoController.setVolume(1);
-    } catch (e) {
-      print('Error initializing video: $e');
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('ไม่สามารถโหลดวิดีโอได้: $e')));
-    }
   }
 
   @override
@@ -49,37 +38,27 @@ class _VideoPlyServiceState extends State<VideoPlyService> {
 
   @override
   Widget build(BuildContext context) {
-    return videoController.value.isInitialized
-        ? AspectRatio(
-          aspectRatio: videoController.value.aspectRatio,
-          child: Stack(
-            children: [
-              VideoPlayer(videoController),
-              Center(
-                child: IconButton(
-                  onPressed: () {
-                    if (!videoController.value.isInitialized) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('วิดีโอยังโหลดไม่เสร็จ')),
-                      );
-                      return;
-                    }
-                    setState(() {
-                      isPlaying = !isPlaying;
-                      isPlaying
-                          ? videoController.play()
-                          : videoController.pause();
-                    });
-                  },
-                  icon: Icon(
-                    isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: widget.color,
-                  ),
-                ),
+    return AspectRatio(
+      aspectRatio: videoController.value.aspectRatio,
+      child: Stack(
+        children: [
+          VideoPlayer(videoController),
+          Center(
+            child: IconButton(
+              onPressed: () {
+                setState(() {
+                  isPlaying = !isPlaying;
+                  isPlaying ? videoController.play() : videoController.pause();
+                });
+              },
+              icon: Icon(
+                isPlaying ? Icons.pause : Icons.play_arrow,
+                color: widget.color,
               ),
-            ],
+            ),
           ),
-        )
-        : Center(child: CircularProgressIndicator(color: widget.color));
+        ],
+      ),
+    );
   }
 }

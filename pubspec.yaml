@@ -62,7 +62,9 @@ dependencies:
   permission_handler: ^11.4.0
   audioplayers: ^6.4.0
   path_provider: ^2.1.5
-  video_player: ^2.9.1
+  video_player: ^2.8.7
+  chewie: ^1.8.1
+  visibility_detector: ^0.4.0+2
   
 
 dev_dependencies:

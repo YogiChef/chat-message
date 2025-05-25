@@ -111,7 +111,8 @@ class Mymessage extends StatelessWidget {
                                   DisplayMessageType(
                                     message:
                                         '${message.repliedMessage.substring(0, message.repliedMessage.length > 14 ? 14 : message.repliedMessage.length)}...',
-                                    type: message.messageType,
+                                    type: message.repliedMessageType,
+                                    isReply: true,
                                     color: Colors.white,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -124,6 +125,7 @@ class Mymessage extends StatelessWidget {
                           DisplayMessageType(
                             message: message.message,
                             type: message.messageType,
+                            isReply: false,
                             color: Colors.white,
 
                             fontSize: 14.sp,

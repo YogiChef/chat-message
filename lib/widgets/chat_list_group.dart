@@ -6,6 +6,7 @@ import 'package:chat_message/providers/theme_provider.dart';
 import 'package:chat_message/utilities/global_methods.dart';
 import 'package:chat_message/widgets/contact_message.dart';
 import 'package:chat_message/widgets/message_widget.dart';
+import 'package:chat_message/widgets/reactions_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -31,6 +32,19 @@ class _ChatListGroupState extends State<ChatListGroup> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  showReactionsDialog({required String uid, required MessageModel message}) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => ReactionsDialog(
+            uid: uid,
+            message: message,
+            onReactionTap: (reaction) {},
+            onContextMenuTap: (item) {},
+          ),
+    );
   }
 
   @override
@@ -99,26 +113,31 @@ class _ChatListGroupState extends State<ChatListGroup> {
                 );
               }
               return isMe
-                  ? Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
-                      vertical: 8.h,
-                    ),
-                    child: Mymessage(
-                      message: element,
-                      onRightSwipe: () {
-                        final reply = MessageReplyModel(
-                          message: element.message,
-                          senderUId: element.senderUId,
-                          senderName: element.senderName,
-                          senderImage: element.senderImage,
-                          messageType: element.messageType,
-                          isMe: isMe,
-                        );
-                        context.read<ChatProvider>().setMessageReplyModel(
-                          reply,
-                        );
-                      },
+                  ? InkWell(
+                    onTap: () {
+                      showReactionsDialog(uid: uid, message: element);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 8.h,
+                      ),
+                      child: Mymessage(
+                        message: element,
+                        onRightSwipe: () {
+                          final reply = MessageReplyModel(
+                            message: element.message,
+                            senderUId: element.senderUId,
+                            senderName: element.senderName,
+                            senderImage: element.senderImage,
+                            messageType: element.messageType,
+                            isMe: isMe,
+                          );
+                          context.read<ChatProvider>().setMessageReplyModel(
+                            reply,
+                          );
+                        },
+                      ),
                     ),
                   )
                   : Padding(

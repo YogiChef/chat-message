@@ -10,6 +10,7 @@ class DisplayMessageType extends StatelessWidget {
   final String message;
   final MessageEnum type;
   final Color color;
+  final bool isReply;
   final int? maxLines;
   final TextOverflow? overflow;
   final double fontSize;
@@ -19,6 +20,7 @@ class DisplayMessageType extends StatelessWidget {
     required this.message,
     required this.type,
     required this.color,
+    required this.isReply,
     this.maxLines,
     this.overflow,
     required this.fontSize,
@@ -36,14 +38,27 @@ class DisplayMessageType extends StatelessWidget {
             overflow: overflow,
           );
         case MessageEnum.image:
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: CachedNetworkImage(imageUrl: message, fit: BoxFit.cover),
-          );
+          return isReply
+              ? Icon(Icons.image)
+              : ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: CachedNetworkImage(imageUrl: message, fit: BoxFit.cover),
+              );
         case MessageEnum.video:
-          return VideoPlyService(videoUrl: message, color: color);
+          return isReply
+              ? Icon(Icons.video_collection)
+              : VideoPlyService(videoUrl: message, color: color);
         case MessageEnum.audio:
-          return AudioPlayered(audioUrl: message, color: color);
+          return isReply
+              ? Icon(Icons.audiotrack)
+              : AudioPlayered(audioUrl: message, color: color);
+        default:
+          return Text(
+            message,
+            style: styles(color: color, fontSize: 14.sp),
+            maxLines: maxLines,
+            overflow: overflow,
+          );
       }
     }
 

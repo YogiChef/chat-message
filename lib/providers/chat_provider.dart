@@ -253,8 +253,10 @@ class ChatProvider extends ChangeNotifier {
       setLoading(false);
       onSucces();
     } on FirebaseException catch (e) {
+      setLoading(false);
       onError(e.message ?? '');
     } catch (e) {
+      setLoading(false);
       onError(e.toString());
     }
   }

@@ -209,7 +209,7 @@ class _BottomChatFieldState extends State<BottomChatField> {
                               controller: _controller,
                               focusNode: _focusNode,
                               style: styles(
-                                color: isDark ? Colors.white : Colors.black54,
+                                color: Colors.black54,
                                 fontSize: 16,
                               ),
                               textInputAction: TextInputAction.done,
@@ -293,7 +293,11 @@ class _BottomChatFieldState extends State<BottomChatField> {
                                               },
                                             );
                                           }).toList(),
-                                  child: Icon(Icons.attachment, size: 30.r),
+                                  child: Icon(
+                                    Icons.attachment,
+                                    size: 30.r,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 suffixIcon: GestureDetector(
                                   onTap:
@@ -347,10 +351,7 @@ class _BottomChatFieldState extends State<BottomChatField> {
                         : TextFormField(
                           controller: _controller,
                           focusNode: _focusNode,
-                          style: styles(
-                            color: isDark ? Colors.white : Colors.black54,
-                            fontSize: 16,
-                          ),
+                          style: styles(color: Colors.black54, fontSize: 16),
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.text,
 
@@ -431,7 +432,11 @@ class _BottomChatFieldState extends State<BottomChatField> {
                                           },
                                         );
                                       }).toList(),
-                              child: Icon(Icons.attachment, size: 30.r),
+                              child: Icon(
+                                Icons.attachment,
+                                size: 30.r,
+                                color: Colors.black,
+                              ),
                             ),
                             suffixIcon: GestureDetector(
                               onTap:

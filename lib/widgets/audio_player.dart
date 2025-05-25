@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:chat_message/services/sevice.dart';
@@ -42,9 +42,9 @@ class _AudioPlayeredState extends State<AudioPlayered> {
         });
       }
     });
-    audioPlayer.onPositionChanged.listen((neposition) {
+    audioPlayer.onPositionChanged.listen((newposition) {
       setState(() {
-        position = neposition;
+        position = newposition;
       });
     });
     audioPlayer.onDurationChanged.listen((duration) {
@@ -60,12 +60,9 @@ class _AudioPlayeredState extends State<AudioPlayered> {
       await audioPlayer
           .setSource(UrlSource(widget.audioUrl))
           .timeout(Duration(seconds: 10));
-      await audioPlayer.resume();
     } catch (e) {
       print('Error loading audio: $e');
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('ไม่สามารถโหลดไฟล์เสียงได้')));
+      showSnackBar(context, 'ไม่สามารถโหลดไฟล์เสียงได้');
     }
   }
 

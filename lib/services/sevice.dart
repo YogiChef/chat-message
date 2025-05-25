@@ -10,6 +10,7 @@ double height = 825.h;
 double width = 375.w;
 
 Color mainColor = const Color.fromARGB(255, 17, 170, 197);
+Color mainTag = Color(0xffeee302);
 
 styles({
   double? letterSpacing,

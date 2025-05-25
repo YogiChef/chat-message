@@ -123,13 +123,15 @@ class ContactMessage extends StatelessWidget {
                                         type: message.messageType,
                                         color: Colors.black,
                                         fontSize: 10.sp,
+                                        isReply: true,
                                       ),
 
                                       DisplayMessageType(
                                         message:
                                             '${message.repliedMessage.substring(0, message.repliedMessage.length > 14 ? 14 : message.repliedMessage.length)}...',
-                                        type: message.messageType,
+                                        type: message.repliedMessageType,
                                         color: Colors.black,
+                                        isReply: true,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         fontSize: 11.sp,
@@ -145,6 +147,7 @@ class ContactMessage extends StatelessWidget {
                             type: message.messageType,
                             color: Colors.black,
                             fontSize: 14.sp,
+                            isReply: false,
                           ),
 
                           Text(
